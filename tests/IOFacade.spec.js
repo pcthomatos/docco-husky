@@ -20,7 +20,7 @@ describe('IOFacade', function(){
 
   describe("when #dirDoesExis is called with a string representing a given directory", function(){
     it("should return true if it exists on the file system or false if it does not", function(){
-      
+
       ioFacadeInstance.buildDir(testDir);
       ioFacadeInstance.dirDoesExist(testDir).should.equal(true)
 
@@ -32,7 +32,7 @@ describe('IOFacade', function(){
   describe("when #buildNormalizedFilePath is called with a path to a dir and a file name", function(){
     it("should return the fully qualified file descriptor pointing at the file in that path", function(){
       var fileName, path, expectedPath, fileDescriptor;
-      
+
       fileName = "test.txt";
       path = testDir + "/" + fileName;
       expectedPath = Path.resolve(path);
