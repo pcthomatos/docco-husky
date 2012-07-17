@@ -259,6 +259,7 @@ cloc = (paths, callback) ->
 # Require our external dependencies, including **Showdown.js**
 # (the JavaScript implementation of Markdown).
 fs       = require 'fs'
+ncp      = require('ncp').ncp
 path     = require 'path'
 showdown = require('./../vendor/showdown').Showdown
 jade     = require 'jade'
@@ -400,6 +401,8 @@ check_config = (context,pkg)->
     # the primary CSS file to load
     css: (__dirname + '/../resources/docco.css')
 
+    public_file: (__dirname + '/../resources/public')
+
     # show the timestamp on generated docs
     show_timestamp: true,
 
@@ -432,6 +435,10 @@ parse_args (sources, project_name, raw_paths) ->
   ensure_directory context.config.output_dir, ->
     generate_readme(context, raw_paths,package_json)
     fs.writeFile "#{context.config.output_dir}/docco.css", fs.readFileSync(context.config.css).toString()
+    ncp context.config.public_file, "#{context.config.output_dir}/public", (err) ->
+      if err
+        return console.error(err)
+      console.log 'done!'
     files = sources[0..sources.length]
     next_file = -> generate_documentation files.shift(), context, next_file if files.length
     next_file()
