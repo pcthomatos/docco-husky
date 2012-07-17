@@ -1,5 +1,5 @@
 var IOFacade, Utilities, Path, FileSystem;
-IOFacade = require('../scripts/toc_builder/io_facade');
+IOFacade = require('../src/toc_generator/io_facade');
 Utilities = require('util');
 Path = require('path');
 FileSystem = require('fs');

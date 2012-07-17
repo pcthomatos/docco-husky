@@ -1,7 +1,7 @@
 var TOCBuilder, IOFacade, helper, Utilities, Path, FileSystem;
 
-TOCBuilder = require('../scripts/toc_builder/toc_builder');
-IOFacade = require('../scripts/toc_builder/io_facade');
+TOCBuilder = require('../src/toc_generator/toc_builder');
+IOFacade = require('../src/toc_generator/io_facade');
 Utilities = require('util');
 Path = require('path');
 FileSystem = require('fs');

@@ -34,8 +34,6 @@ class TOCBuilder
 
   createTableStructure: (descriptorsArray = new Array) ->
    entities = @sortDescriptors descriptorsArray
-   for entity in entities
-
 
 
 module.exports = TOCBuilder
