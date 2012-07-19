@@ -1,12 +1,12 @@
 Utilities = require('util')
-TOCEntityFactory = require('./toc_entity_factory')
+#TOCEntryFactory = require('./toc_entry_factory.coffee')
 
 class TOCBuilder
   constructor: (resource, tempDirName, ioFacadeInstance)->
     @ioFacade= ioFacadeInstance
     @resources = resource || new Array()
     @tempDirName = tempDirName
-    @EntityFactory = TOCEntityFactory.Singleton.get()
+    #@EntityFactory = TOCEntityFactory.Singleton.get()
 
   generateTOC: ()->
     @createTableStructure()

@@ -1,22 +1,19 @@
 class TOCEntry
-  constructor: (name, protocol, indentSymbol, level) ->
-    @name = name
-    @protocol = protocol
-    @url = ""
-    @level = level
-    @indentation = ""
-    @indentSymbol = indentSymbol
+  constructor: (filePath) ->
+    @filePath = filePath
+    @setName()
+    @setUrl()
 
-  isFile: () ->
-    @name.indexOf(".") > 0
+  setName: ->
+    pattern = /[a-z]+\.{1}[a-z]+$/im
+    results  = @filePath.match(pattern)
+    @name = results[0]
 
-  setIndentation: () ->
-    counter = 0
-    while counter < @level
-      @indentation + @indentSymbol
-      counter++
-    return null
+  setUrl: ->
+    @url = "#{@filePath}.html"
 
-  toString: ()->
-    "#{@indentation} [#{@name}](#{@url})\n"
-  
+  export: ->
+    "* [#{@filePath}](#{@url})\n"
+
+
+module.exports = TOCEntry

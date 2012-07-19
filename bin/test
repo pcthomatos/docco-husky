@@ -19,5 +19,5 @@ else
   MOCHA_ARGS="tests/*"
 fi
 
-./node_modules/mocha/bin/mocha tests/helpers/helper $MOCHA_ARGS --require should --compilers coffee:coffee-script
+./node_modules/mocha/bin/mocha tests/helpers/helper $MOCHA_ARGS --require should --compilers coffee:coffee-script --reporter spec
 

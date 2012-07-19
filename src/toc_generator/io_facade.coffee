@@ -18,10 +18,10 @@ class IOFacade
   #   Builds a file system directory at the path provided.
   # @param {String} directoryName A string value corresponding to the desired path of the directory
   # @return {Null} No return value
-  
+
   buildDir: (directoryName)->
     path = Path.normalize(directoryName)
-    if Path.existsSync(path)
+    if FileSystem.existsSync(path)
       @rmRecursive(path)
     FileSystem.mkdirSync(path)
 
@@ -32,7 +32,7 @@ class IOFacade
   dirDoesExist: (pathToDirectory) ->
     if pathToDirectory
       path = Path.normalize(pathToDirectory)
-      return Path.existsSync(path)
+      return FileSystem.existsSync(path)
 
   # buildNormalizedFilePath:
   #   Builds a normalized path for a given file at within a given path
@@ -42,7 +42,7 @@ class IOFacade
   buildNormalizedFilePath: (path, fileName)->
     fileNameBase = Path.basename(fileName)
     fileDescriptor = Path.join(path, fileNameBase)
-    return Path.resolve(fileDescriptor) 
+    return Path.resolve(fileDescriptor)
 
   # writeBufferToFile:
   #   Writes a given buffer to a given file descriptor and calls the povided callback method upon completetion.
@@ -68,6 +68,6 @@ class IOFacade
         FileSystem.unlinkSync path + file  if fileStats.isFile()
         rmRecursive path + file  if fileStats.isDirectory()
         i += 1
-    FileSystem.rmdirSync path    
-    
+    FileSystem.rmdirSync path
+
 module.exports = IOFacade
