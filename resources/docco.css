@@ -139,6 +139,7 @@ code {
     display: none;
     top: 22px;
     position: fixed;
+    z-index: 5;
 }
 #jump_to:hover #jump_wrapper {
     display: block;
