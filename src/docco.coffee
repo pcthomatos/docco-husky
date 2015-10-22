@@ -269,6 +269,17 @@ _        = require 'underscore'
 walk     = require 'walk'
 {spawn, exec} = require 'child_process'
 
+# Groups an array given a function
+arrayGroupBy = (array, aggregate) ->
+  array.reduce((previous, current, index, context) ->
+    group = aggregate(current)
+    if previous[group]
+      previous[group].push(current)
+    else
+      previous[group] = [ current ]
+    previous
+  {})
+
 # A list of the languages that Docco supports, mapping the file extension to
 # the name of the Pygments lexer and the symbol that indicates a comment. To
 # add another language to Docco's repertoire, add it here.
@@ -421,6 +432,12 @@ check_config = (context,pkg)->
 parse_args (sources, project_name, raw_paths) ->
   # Rather than relying on globals, let's pass around a context w/ misc info
   # that we require down the line.
+  sources = arrayGroupBy sources, (source) -> 
+    console.log "START"
+    console.log source
+    console.log path.basename(source)[0]
+    console.log "END"
+    path.basename(source)[0]
   context = sources: sources, options: { project_name: project_name }
   
   package_path = process.cwd() + '/package.json'
