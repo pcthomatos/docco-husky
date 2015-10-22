@@ -259,6 +259,7 @@ cloc = (paths, callback) ->
 # Require our external dependencies, including **Showdown.js**
 # (the JavaScript implementation of Markdown).
 fs       = require 'fs'
+ncp      = require('ncp').ncp
 path     = require 'path'
 showdown = require('./../vendor/showdown').Showdown
 jade     = require 'jade'
@@ -267,6 +268,17 @@ gravatar = require 'gravatar'
 _        = require 'underscore'
 walk     = require 'walk'
 {spawn, exec} = require 'child_process'
+
+# Groups an array given a function
+arrayGroupBy = (array, aggregate) ->
+  array.reduce((previous, current, index, context) ->
+    group = aggregate(current)
+    if previous[group]
+      previous[group].push(current)
+    else
+      previous[group] = [ current ]
+    previous
+  {})
 
 # A list of the languages that Docco supports, mapping the file extension to
 # the name of the Pygments lexer and the symbol that indicates a comment. To
@@ -400,6 +412,8 @@ check_config = (context,pkg)->
     # the primary CSS file to load
     css: (__dirname + '/../resources/docco.css')
 
+    public_file: (__dirname + '/../resources/public')
+
     # show the timestamp on generated docs
     show_timestamp: true,
 
@@ -418,6 +432,12 @@ check_config = (context,pkg)->
 parse_args (sources, project_name, raw_paths) ->
   # Rather than relying on globals, let's pass around a context w/ misc info
   # that we require down the line.
+  sources = arrayGroupBy sources, (source) -> 
+    console.log "START"
+    console.log source
+    console.log path.basename(source)[0]
+    console.log "END"
+    path.basename(source)[0]
   context = sources: sources, options: { project_name: project_name }
   
   package_path = process.cwd() + '/package.json'
@@ -432,6 +452,10 @@ parse_args (sources, project_name, raw_paths) ->
   ensure_directory context.config.output_dir, ->
     generate_readme(context, raw_paths,package_json)
     fs.writeFile "#{context.config.output_dir}/docco.css", fs.readFileSync(context.config.css).toString()
+    ncp context.config.public_file, "#{context.config.output_dir}/public", (err) ->
+      if err
+        return console.error(err)
+      console.log 'done!'
     files = sources[0..sources.length]
     next_file = -> generate_documentation files.shift(), context, next_file if files.length
     next_file()
