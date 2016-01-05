@@ -105,7 +105,10 @@ parse = (source, code) ->
       if line.match(language.multi_end_matcher)
         in_multi = false
         try
-          parsed = dox.parseComments( multi_accum )[0]
+          if language.name == "coffee-script"
+            parsed = dox.parseCommentsCoffee( multi_accum )[0]
+          else
+            parsed = dox.parseComments( multi_accum )[0]
           docs_text += dox_template(parsed)
         catch error
           console.log "Error parsing comments with Dox: #{error}"
