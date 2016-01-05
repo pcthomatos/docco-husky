@@ -31,7 +31,7 @@
   },
   "dependencies": {
     "coffee-script": "latest",
-    "dox": "0.1.2",
+    "dox": "hull/dox-coffee",
     "jade": "0.17.0",
     "gravatar": "1.0.3",
     "underscore": "1.2.x",
