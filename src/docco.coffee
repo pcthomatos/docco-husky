@@ -277,7 +277,7 @@ walk     = require 'walk'
 # add another language to Docco's repertoire, add it here.
 languages =
   '.coffee':
-    name: 'coffee-script', symbol: '#'
+    name: 'coffee-script', symbol: '#', multi_start: "###", multi_end: "###"
   '.js':
     name: 'javascript', symbol: '//', multi_start: "/*", multi_end: "*/"
   '.rb':
