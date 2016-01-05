@@ -310,10 +310,14 @@ for ext, l of languages
   # Otherwise set the multi matchers to an unmatchable RegEx
   if l.multi_start == "/*"
     l.multi_start_matcher = new RegExp(/^[\s]*\/\*[.]*/)
+  else if l.multi_start == "###"
+    l.multi_start_matcher = new RegExp(/^[\s]*###[.]*/)
   else
     l.multi_start_matcher = new RegExp(/a^/)
   if l.multi_end == "*/"
     l.multi_end_matcher = new RegExp(/.*\*\/.*/)
+  else if l.multi_start == "###"
+    l.multi_end_matcher = new RegExp(/.*###.*/)
   else
     l.multi_end_matcher = new RegExp(/a^/)
 
