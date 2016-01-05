@@ -105,7 +105,7 @@ parse = (source, code) ->
       if line.match(language.multi_end_matcher)
         in_multi = false
         try
-          if path.extname(source) == ".coffee"
+          if language.name == "coffee-script"
             parsed = dox.parseCommentsCoffee( multi_accum )[0]
           else
             parsed = dox.parseComments( multi_accum )[0]
@@ -277,7 +277,7 @@ walk     = require 'walk'
 # add another language to Docco's repertoire, add it here.
 languages =
   '.coffee':
-    name: 'coffee-script', symbol: '#', multi_start: "###", multi_end: "###"
+    name: 'coffee-script', symbol: '#', multi_start: "#start#", multi_end: "#end#"
   '.js':
     name: 'javascript', symbol: '//', multi_start: "/*", multi_end: "*/"
   '.rb':
@@ -310,15 +310,15 @@ for ext, l of languages
   # Otherwise set the multi matchers to an unmatchable RegEx
   if l.multi_start == "/*"
     l.multi_start_matcher = new RegExp(/^[\s]*\/\*[.]*/)
-  else if l.multi_start == "###"
-    l.multi_start_matcher = new RegExp(/^[\s]*###[.]*/)
+  else if l.multi_start == "#start#"
+    l.multi_start_matcher = new RegExp(/^[\s]*#start#[.]*/)
   else
     l.multi_start_matcher = new RegExp(/a^/)
   
   if l.multi_end == "*/"
     l.multi_end_matcher = new RegExp(/.*\*\/.*/)
-  else if l.multi_end == "###"
-    l.multi_end_matcher = new RegExp(/.*###.*/)
+  else if l.multi_end == "#end#"
+    l.multi_end_matcher = new RegExp(/.*#end#.*/)
   else
     l.multi_end_matcher = new RegExp(/a^/)
 
