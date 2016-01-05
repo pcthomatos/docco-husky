@@ -105,7 +105,7 @@ parse = (source, code) ->
       if line.match(language.multi_end_matcher)
         in_multi = false
         try
-          if language.name == "coffee-script"
+          if path.extname(source) == ".coffee"
             parsed = dox.parseCommentsCoffee( multi_accum )[0]
           else
             parsed = dox.parseComments( multi_accum )[0]
