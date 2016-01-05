@@ -314,9 +314,10 @@ for ext, l of languages
     l.multi_start_matcher = new RegExp(/^[\s]*###[.]*/)
   else
     l.multi_start_matcher = new RegExp(/a^/)
+  
   if l.multi_end == "*/"
     l.multi_end_matcher = new RegExp(/.*\*\/.*/)
-  else if l.multi_start == "###"
+  else if l.multi_end == "###"
     l.multi_end_matcher = new RegExp(/.*###.*/)
   else
     l.multi_end_matcher = new RegExp(/a^/)
