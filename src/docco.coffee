@@ -253,7 +253,7 @@ parse_markdown = (context, src) ->
   return showdown.makeHtml markdown
 
 cloc = (paths, callback) ->
-  exec "'#{__dirname}/../vendor/cloc.pl' --quiet --read-lang-def='#{__dirname}/../resources/cloc_definitions.txt' #{paths}", (err, stdout) ->
+  exec "'#{__dirname}/../vendor/cloc.pl' --quiet #{paths}", (err, stdout) ->
     console.log "Calculating project stats failed #{err}" if err
     callback stdout
 
