@@ -130,6 +130,10 @@ code {
     cursor: pointer;
     text-align: right;
 }
+#jump_to {
+    text-align: left;
+    width: 400px;
+}
 #jump_to,
 #jump_wrapper {
     border-width: 0px;
@@ -142,13 +146,13 @@ code {
     position: fixed;
     z-index: 5;
 }
-#jump_to:hover #jump_wrapper {
+#jump_to:hover #jump_wrapper, #jump_wrapper:hover{
     display: block;
 }
 #jump_page {
     padding: 5px 0 3px;
-    height: 400px;
-    min-width: 150px;
+    height: 500px;
+    min-width: 400px;
     overflow-y: auto;
     border: 1px solid #eee;
 }
