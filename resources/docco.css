@@ -71,7 +71,7 @@ code {
     left: 525px;
     right: 0;
     bottom: 0;
-    background: #f5f5ff;
+    background: #f8f8ee;
     border-left: 1px solid #e5e5ee;
     z-index: -1;
 }
@@ -253,7 +253,7 @@ th.code {
     padding: 14px 15px 16px 25px;
     width: 100%;
     vertical-align: top;
-    background: #ffffEE;
+    background: #f8f8ee;
     border-left: 1px solid #e5e5ee;
 }
 pre,
